@@ -15,6 +15,8 @@ The site presents NST Studio's delivery model, capabilities, production work, pa
 - Reduced-motion support
 - Line-based architecture illustration and labelled screenshot placeholders
 - Downloadable NST Studio one-page PDF
+- Markdown-powered case studies with automatic preview routes
+- Mermaid diagrams, syntax-highlighted code, media, embeds, callouts, and toggles
 - Centralized content for copy updates
 
 ## Technology
@@ -78,6 +80,7 @@ app/
 components/
   studio-page.tsx      Page sections and reusable UI components
 content/
+  case-studies/       Markdown source files for case studies
   site.ts              Editable site copy and structured content
 public/
   nst-studio-one-pager.pdf
@@ -87,11 +90,10 @@ scripts/
 
 ## Editing content
 
-Most marketing copy and structured content lives in [`content/site.ts`](content/site.ts). Update this file to change:
+Most general marketing copy and structured content lives in [`content/site.ts`](content/site.ts). Update this file to change:
 
 - Proof metrics
 - Services
-- Case studies
 - Delivery steps
 - Mentor profiles
 - Packages and pricing
@@ -99,6 +101,45 @@ Most marketing copy and structured content lives in [`content/site.ts`](content/
 - FAQs
 
 Layout and interactive behavior live in [`components/studio-page.tsx`](components/studio-page.tsx). Theme variables and responsive styles live in [`app/globals.css`](app/globals.css).
+
+## Writing case studies
+
+Case studies live in [`content/case-studies/`](content/case-studies). Each published `.md` file automatically creates:
+
+- A card in the homepage Work section
+- A static preview route at `/work/<filename>`
+- Page metadata derived from its front matter
+
+Copy [`content/case-studies/_template.md`](content/case-studies/_template.md) to create a case study. Files beginning with `_` are ignored by the site.
+
+Every case study requires this front matter:
+
+```yaml
+---
+name: Case study title
+industry: Industry · Project type
+problem: One sentence describing the problem.
+build: One sentence describing what was built.
+tags:
+  - TypeScript
+  - PostgreSQL
+result: A concise result or labelled placeholder
+screen: Product area · screenshot label
+order: 10
+---
+```
+
+The renderer supports standard Markdown plus:
+
+- GitHub Flavoured Markdown tables, task lists, and strikethrough
+- Syntax-highlighted fenced code blocks
+- Mermaid diagrams in `mermaid` fenced code blocks
+- `<aside class="callout">` callouts
+- `<details>` and `<summary>` expandable sections
+- Images, HTML video and audio elements
+- Trusted iframe embeds
+
+Store local media under `public/case-studies/` and reference it with `/case-studies/filename.ext`. Raw HTML is supported because case studies are trusted, repository-controlled source files. Do not render untrusted user-submitted Markdown through this pipeline.
 
 ## Design system
 

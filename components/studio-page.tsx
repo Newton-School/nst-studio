@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { caseStudies, faqs, mentors, metrics, packages, process, services, stack } from "@/content/site";
+import Link from "next/link";
+import type { CaseStudySummary } from "@/content/case-study-types";
+import { faqs, mentors, metrics, packages, process, services, stack } from "@/content/site";
 
 const Arrow = () => <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h11M11 6l4 4-4 4" /></svg>;
 const CalendarIcon = () => <svg aria-hidden="true" viewBox="0 0 20 20"><rect x="3" y="4.5" width="14" height="12" rx="2"/><path d="M6.5 2.5v4M13.5 2.5v4M3 8h14"/></svg>;
@@ -73,8 +75,8 @@ function ProductFrame({ label }: { label: string }) {
   </div>;
 }
 
-export function CaseStudyCard({ item }: { item: typeof caseStudies[number] }) {
-  return <Card className="case-card"><ProductFrame label={item.screen}/><div className="case-content"><div className="case-head"><h3>{item.name}</h3><span>{item.industry}</span></div><p className="problem">{item.problem}</p><p>{item.build}</p><div className="tags">{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div><div className="result"><span>KEY RESULT</span><strong>{item.result}</strong></div><span className="case-link" aria-label="Case study link placeholder">Read case study <small>· PLACEHOLDER</small> <Arrow/></span></div></Card>;
+export function CaseStudyCard({ item }: { item: CaseStudySummary }) {
+  return <Link className="case-card-link" href={`/work/${item.slug}`} aria-label={`View ${item.name} case study`}><Card className="case-card"><ProductFrame label={item.screen}/><div className="case-content"><div className="case-head"><h3>{item.name}</h3><span>{item.industry}</span></div><p className="problem">{item.problem}</p><p>{item.build}</p><div className="tags">{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div><div className="result"><span>KEY RESULT</span><strong>{item.result}</strong></div><span className="case-link">View case study <Arrow/></span></div></Card></Link>;
 }
 
 export function MentorCard({ item, index }: { item: typeof mentors[number]; index: number }) {
@@ -89,7 +91,7 @@ export function FAQItem({ item, open, onClick }: { item: typeof faqs[number]; op
   return <div className={`faq-item ${open ? "open" : ""}`}><h3><button onClick={onClick} aria-expanded={open}><span>{item.q}</span><i aria-hidden="true"/></button></h3><div className="faq-answer" aria-hidden={!open}><p>{item.a}</p></div></div>;
 }
 
-export function StudioPage() {
+export function StudioPage({ caseStudies }: { caseStudies: CaseStudySummary[] }) {
   const [faqOpen, setFaqOpen] = useState(0);
   useEffect(() => {
     const items = document.querySelectorAll<HTMLElement>("[data-reveal]");
