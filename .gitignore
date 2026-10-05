@@ -1,0 +1,16 @@
+# dependencies
+/node_modules
+
+# Next.js output
+/.next
+/out
+/next-env.d.ts
+
+# local and generated QA files
+/tmp
+*.log
+.DS_Store
+
+# environment files
+.env*
+!.env.example
