@@ -12,37 +12,6 @@ export const services = [
   { icon: "cloud", title: "Backend and cloud", body: "APIs, integrations, CI/CD and infrastructure that scale." },
 ] as const;
 
-export const caseStudies = [
-  {
-    name: "RishiVerse", industry: "Education · ERP",
-    problem: "A university of 5,000+ students ran 25+ departments on paper.",
-    build: "A production ERP with 100+ REST APIs, Aadhaar KYC and face-recognition campus security.",
-    tags: ["Node.js", "PostgreSQL", "AWS", "REST"], result: "99.8% uptime · 80% less manual admin work",
-    screen: "University ERP · operations dashboard",
-  },
-  {
-    name: "Zuvees", industry: "Quick commerce · Dubai",
-    problem: "60-minute gift delivery needed inventory synced across hubs and marketplaces.",
-    build: "A custom order management system integrated with Shopify, a WMS, Talabat and Instashop, plus an AI gift advisor.",
-    tags: ["Shopify", "Node.js", "AI", "Integrations"], result: "Unified inventory and order operations",
-    screen: "Order management · fulfilment view",
-  },
-  {
-    name: "Maverick / FieldVue", industry: "AI · Field services",
-    problem: "Painting contractors measured surfaces by hand, making quotes slow and inconsistent.",
-    build: "An AI estimation platform using computer vision, with contractor overrides and replayable, auditable quotes.",
-    tags: ["Vertex AI", "EventBridge", "Microservices", "Mobile"], result: "Repeatable estimates with human review",
-    screen: "AI estimator · audit trail",
-  },
-  {
-    name: "IITR collaboration", industry: "Public sector",
-    problem: "Welfare scheme information was scattered across sources and hard to access.",
-    build: "A central searchable portal with automated data collection for underserved communities.",
-    tags: ["Django", "Puppeteer", "AWS", "Docker"], result: "One searchable source for scheme information",
-    screen: "Welfare portal · search results",
-  },
-];
-
 export const process = [
   { title: "Discovery", body: "Goals, constraints and success criteria agreed." },
   { title: "Architecture", body: "Mentor sign-off before development starts." },
